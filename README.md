@@ -5,6 +5,18 @@
 * O banco de dados utilizado é o MySQL, que será executado via Docker, as tabelas são de Produtos, Departamentos, Autenticacao e ProdutoAudit.
 * A Autenticação é feita utilizando um mock, de forma que as senhas armazenadas são valores base64.
 
+## Captura de Tela
+
+Veja algumas imagens da aplicação em exeução:
+
+![Tela de login](ExemplosDetela/TelaDeLogin.png)
+
+![Tela de Produtos](ExemplosDetela/TelaDeProdutos.png)
+
+![Tela de novo produto](ExemplosDetela/TelaDeNovoProduto.png)
+
+![Tela de Departamentos](ExemplosDetela/TelaDeDepartamentos.png)
+
 ## Requisitos
 
 Certifique-se de que os seguintes softwares estão instalados no seu sistema:
@@ -69,7 +81,7 @@ dotnet run --urls=http://localhost:5292
 - **API**: `http://localhost:5042`
 - **MVC**: `http://localhost:5292`
 
-# 7. Verificando o Banco de Dados
+### 7. Verificando o Banco de Dados
 
 Caso queira verificar o banco de dados via linha de comando, você pode utilizar o comando a seguir para entrar no contêiner MySQL:
 
@@ -93,3 +105,9 @@ start run_project.bat
 ```
 
 Este script abrirá duas janelas de comando, uma para a API e outra para a aplicação MVC, e deixará ambos os serviços rodando em segundo plano.
+
+
+### 9. Testes
+
+Há possibilidade de execução de testes automatizados na API, basta utilizar o Visual Studio (utilizei a versão 2022) e rodar o projeto de API.Tests
+O swagger está configurado para testes de API basta utilizar a URL com a API em execução: http://localhost:5042/swagger/index.html
