@@ -1,0 +1,77 @@
+﻿@model Microsoft.AspNetCore.Identity.Data.RegisterRequest
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Conta</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .register-container {
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            height: 100vh; /* Usa a altura total da tela */
+            background-color: #f8f9fa; /* Cor de fundo opcional */
+        }
+
+        .register-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px; /* Largura máxima do formulário */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%; /* Largura total do campo de entrada */
+            max-width: 100%; /* Garante que o campo não ultrapasse a largura do contêiner */
+            box-sizing: border-box; /* Inclui padding e borda na largura total */
+        }
+
+        .btn-custom {
+            width: 100%; /* Largura total do botão */
+            max-width: 100%; /* Garante que o botão não ultrapasse a largura do contêiner */
+        }
+
+        .btn-primary {
+            margin-top: 10px; /* Distância entre o botão e os controles acima */
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-form">
+            <h1>Registrar Conta</h1>
+
+            <form asp-action="Register" method="post">
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary btn-custom">Registrar</button>
+                </div>
+
+                <div class="mt-3">
+                    <a asp-controller="User" asp-action="Login" class="btn btn-secondary btn-custom">Voltar ao Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

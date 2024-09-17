@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using Microsoft.AspNetCore.Identity;
 using MySql.Data.MySqlClient;
 using Shared.DTOs;
 using System.Data;
@@ -32,7 +33,8 @@ namespace API.Data
 
                 var command = new MySqlCommand(@"SELECT P.*, D.Codigo AS DepartamentoCodigo, D.Descricao AS DepartamentoDescricao  
                                                  FROM Produtos P INNER JOIN Departamentos D ON P.DepartamentoId = D.Id 
-                                                 WHERE P.Excluido = FALSE 
+                                                 WHERE P.Excluido = FALSE
+                                                 ORDER BY Codigo
                                                  LIMIT @Offset, @PageSize", connection);
 
                 command.Parameters.AddWithValue("@Offset", (pageNumber - 1) * pageSize);
@@ -74,7 +76,7 @@ namespace API.Data
                 await connection.OpenAsync();
 
                 var command = new MySqlCommand(@"SELECT P.*, D.Codigo AS DepartamentoCodigo, D.Descricao AS DepartamentoDescricao  
-                                                 FROM Produtos P INNER JOIN Departamentos D 
+                                                 FROM Produtos P INNER JOIN Departamentos D ON P.DepartamentoId = D.Id
                                                  WHERE P.Codigo = @Codigo AND P.Excluido = FALSE", connection);
 
                 command.Parameters.AddWithValue("@Codigo", codigo);
@@ -111,7 +113,7 @@ namespace API.Data
 
                 var command = new MySqlCommand(@"INSERT INTO Produtos (Codigo, Descricao, DepartamentoId, Preco, Status, Excluido) 
                                                  VALUES (@Codigo, @Descricao, @DepartamentoId, @Preco, @Status, FALSE); 
-                                                 SELECT LAST_INSERT_ID(); ", connection);
+                                                 SELECT Id FROM Produtos WHERE Codigo = @Codigo; ", connection);
 
                 command.Parameters.AddWithValue("@Codigo", produto.Codigo);
                 command.Parameters.AddWithValue("@Descricao", produto.Descricao);
@@ -217,9 +219,69 @@ namespace API.Data
 
             return departamento;
         }
+
+        public async Task<int> GetTotalCountAsync()
+        {
+            int totalCount = 0;
+            using (var connection = GetConnection())
+            {
+                await connection.OpenAsync();
+
+                var command = new MySqlCommand("SELECT COUNT(*) AS TotalCount FROM Produtos", connection);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        totalCount = reader.GetInt32("TotalCount");
+                    }
+                }
+            }
+
+            return totalCount;
+        }
         #endregion
 
         #region Métodos para User
+        public async Task<bool> CreateUserAsync(string email, string passwordHash)
+        {
+            using (var connection = GetConnection())
+            {
+                await connection.OpenAsync();
+
+                var command = new MySqlCommand("INSERT INTO Autenticacao (Email, PasswordHash) VALUES (@Email, @PasswordHash)", connection);
+
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@PasswordHash", passwordHash);
+
+                var rowsAffected = await command.ExecuteNonQueryAsync();
+
+                return rowsAffected > 0;
+            }
+        }
+
+        public async Task<string> GetPasswordHash(string email)
+        {
+            var passwordHash = string.Empty;
+
+            using (var connection = GetConnection())
+            {
+                await connection.OpenAsync();
+
+                var command = new MySqlCommand("SELECT PasswordHash FROM Autenticacao WHERE Email = @Email", connection);
+                command.Parameters.AddWithValue("@Email", email);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        passwordHash = reader.GetString("PasswordHash");
+                    }
+                }
+            }
+
+            return passwordHash;
+        }
         #endregion
 
     }

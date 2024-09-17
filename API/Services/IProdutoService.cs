@@ -10,6 +10,7 @@ namespace API.Services
         Task<bool> DeleteProdutoAsync(string codigo);
         Task<IEnumerable<ProdutoDTO>> GetAllProdutosAsync(int pageSize, int pageNumber);
         Task<ProdutoDTO> GetProdutoAsync(string codigo);
+        Task<int> GetTotalCountAsync();
         Task<bool> UpdateProdutoAsync(Produto produto);
     }
 }

@@ -1,0 +1,54 @@
+﻿@model Shared.DTOs.DepartamentoDTO
+
+@{
+    ViewData["Title"] = "Departamento";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Commerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .dl-horizontal dt {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .dl-horizontal dd {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Detalhes do Departamento</h4>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Código</dt>
+                    <dd class="col-sm-9">@Model.Codigo</dd>
+
+                    <dt class="col-sm-3">Descrição</dt>
+                    <dd class="col-sm-9">@Model.Descricao</dd>
+                </dl>
+                <a href="@Url.Action("Index", "Departamento")" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

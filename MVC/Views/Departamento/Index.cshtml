@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Shared.DTOs.DepartamentoDTO>
+
+@{
+    ViewData["Title"] = "Departamentos";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Commerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .table thead th {
+            background-color: #f8f9fa;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+            .btn-info:hover {
+                color: #fff;
+                background-color: #138496;
+                border-color: #117a8b;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var departamento in Model)
+                {
+                    <tr>
+                        <td>@departamento.Codigo</td>
+                        <td>@departamento.Descricao</td>
+                        <td>
+                            <a href="@Url.Action("Details", "Departamento", new { codigo = departamento.Codigo })" class="btn btn-info btn-sm">Detalhes</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

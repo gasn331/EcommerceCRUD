@@ -11,7 +11,6 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class ProdutoController : ControllerBase
     {
         private readonly IProdutoService _produtoService;
@@ -50,7 +49,7 @@ namespace API.Controllers
 
             var createdProdutoDto = _mapper.Map<ProdutoDTO>(createdProduto);
 
-            return CreatedAtAction(nameof(GetProduto), new {codigo = createdProdutoDto.Codigo});
+            return CreatedAtAction(nameof(GetProduto), new {codigo = createdProdutoDto.Codigo}, createdProduto);
         }
 
         //PUT: api/produto/{codigo}
@@ -83,6 +82,20 @@ namespace API.Controllers
 
             return NoContent();
         }
-        
+
+        [HttpGet("totalCount")]
+        public async Task<ActionResult<int>> GetTotalCount()
+        {
+            try
+            {
+                var totalCount = await _produtoService.GetTotalCountAsync();
+                return Ok(totalCount);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }

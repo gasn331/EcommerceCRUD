@@ -1,0 +1,72 @@
+﻿@model Microsoft.AspNetCore.Identity.Data.LoginRequest
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            height: 100vh; /* Usa a altura total da tela */
+            background-color: #f8f9fa; /* Cor de fundo opcional */
+        }
+
+        .login-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px; /* Largura máxima do formulário */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%; /* Largura total do campo de entrada */
+        }
+
+        .btn {
+            width: 100%; /* Largura total do botão */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>Login</h1>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @ViewData.ModelState[""].Errors.FirstOrDefault()?.ErrorMessage
+                </div>
+            }
+
+            <form asp-action="Login" method="post">
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a href="@Url.Action("Register", "User")" class="btn btn-secondary mt-3">Registrar</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

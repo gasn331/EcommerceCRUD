@@ -53,6 +53,11 @@ namespace API.Services
             return new ProdutoDTO();
         }
 
+        public async Task<int> GetTotalCountAsync() 
+        {
+            return await _dataAccess.GetTotalCountAsync();
+        }
+
         public async Task<bool> UpdateProdutoAsync(Produto produto)
         {
             var result = await _dataAccess.UpdateProdutoAsync(produto);

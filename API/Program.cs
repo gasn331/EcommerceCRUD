@@ -2,6 +2,7 @@ using API.Data;
 using API.MappingProfiles;
 using API.Services;
 using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace API
 {
@@ -22,9 +23,12 @@ namespace API
             // Injeção de dependência dos serviços
             builder.Services.AddScoped<IProdutoService, ProdutoService>();
             builder.Services.AddScoped<IDepartamentoService, DepartamentoService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             // Configuração do AutoMapper com MappingProfile
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+            // Configuração de autenticação removida
 
             // Adicionar controladores e suporte ao Swagger
             builder.Services.AddControllers();
@@ -42,7 +46,7 @@ namespace API
 
             app.UseHttpsRedirection();
 
-            // Middleware de autenticação e autorização removidos para ignorar autenticação
+            // Middleware de autenticação e autorização removido
             // app.UseAuthentication();
             // app.UseAuthorization();
 

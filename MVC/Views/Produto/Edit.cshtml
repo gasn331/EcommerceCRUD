@@ -1,0 +1,103 @@
+﻿@model ProdutoCreateViewModel
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Commerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem; /* Espaço entre os campos do formulário */
+        }
+
+        .btn-group {
+            margin-top: 1rem;
+        }
+
+        .form-control {
+            max-width: 100%; /* Ajusta a largura para não exceder o contêiner */
+        }
+
+        .checkbox-group {
+            margin-top: 1rem;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">@ViewData["Title"]</h1>
+
+        <h4 class="mb-3">Produto</h4>
+        <hr />
+
+        <form asp-action="Edit" method="post">
+            <div class="form-group">
+                <label asp-for="Produto.Codigo" class="form-label">Código</label>
+                <input asp-for="Produto.Codigo" class="form-control" readonly />
+                <span asp-validation-for="Produto.Codigo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Produto.Descricao" class="form-label">Descrição</label>
+                <input asp-for="Produto.Descricao" class="form-control" />
+                <span asp-validation-for="Produto.Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DepartamentoSelecionadoCodigo" class="form-label">Departamento</label>
+                <select asp-for="DepartamentoSelecionadoCodigo" class="form-control" asp-items="@(new SelectList(Model.DepartamentosDisponiveis, "Codigo", "Descricao"))">
+                    <option value="">Selecione um departamento</option>
+                </select>
+                <span asp-validation-for="DepartamentoSelecionadoCodigo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Produto.Preco" class="form-label">Preço</label>
+                <input asp-for="Produto.Preco" class="form-control" />
+                <span asp-validation-for="Produto.Preco" class="text-danger"></span>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <div class="form-check">
+                    <input asp-for="Produto.Status" type="checkbox" class="form-check-input" />
+                    <label asp-for="Produto.Status" class="form-check-label">Status</label>
+                    <span asp-validation-for="Produto.Status" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Campos ocultos para persistir DepartamentosDisponiveis no POST -->
+            @for (var i = 0; i < Model.DepartamentosDisponiveis.ToList().Count; i++)
+            {
+                <input type="hidden" name="DepartamentosDisponiveis[@i].Id" value="@Model.DepartamentosDisponiveis.ElementAt(i).Id" />
+                <input type="hidden" name="DepartamentosDisponiveis[@i].Codigo" value="@Model.DepartamentosDisponiveis.ElementAt(i).Codigo" />
+                <input type="hidden" name="DepartamentosDisponiveis[@i].Descricao" value="@Model.DepartamentosDisponiveis.ElementAt(i).Descricao" />
+            }
+
+            <input type="hidden" name="codigo" value="@Model.Produto.Codigo" />
+
+            <div class="form-group btn-group">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="@Url.Action("Index", "Produto")" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
