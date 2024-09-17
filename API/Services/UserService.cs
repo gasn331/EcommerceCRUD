@@ -4,9 +4,9 @@ namespace API.Services
 {
     public class UserService : IUserService
     {
-        private readonly MySqlDataAccess _dataAccess;
+        private readonly IMySqlDataAccess _dataAccess;
 
-        public UserService(MySqlDataAccess dataAccess)
+        public UserService(IMySqlDataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }

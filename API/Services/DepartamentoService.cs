@@ -7,10 +7,10 @@ namespace API.Services
 {
     public class DepartamentoService : IDepartamentoService
     {
-        private readonly MySqlDataAccess _dataAccess;
+        private readonly IMySqlDataAccess _dataAccess;
         private readonly IMapper _mapper;
 
-        public DepartamentoService(MySqlDataAccess dataAccess, IMapper mapper)
+        public DepartamentoService(IMySqlDataAccess dataAccess, IMapper mapper)
         {
             _dataAccess = dataAccess;
             _mapper = mapper;

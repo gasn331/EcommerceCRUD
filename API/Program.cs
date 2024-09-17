@@ -12,13 +12,11 @@ namespace API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Adicionar serviços ao contêiner
-
             // Configuração da string de conexão MySQL
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-            // Injeção de dependência de MySqlDataAccess
-            builder.Services.AddSingleton(new MySqlDataAccess(connectionString));
+            // Adicionar serviços ao contêiner
+            builder.Services.AddScoped<IMySqlDataAccess>(provider => new MySqlDataAccess(connectionString));
 
             // Injeção de dependência dos serviços
             builder.Services.AddScoped<IProdutoService, ProdutoService>();
@@ -27,8 +25,6 @@ namespace API
 
             // Configuração do AutoMapper com MappingProfile
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-            // Configuração de autenticação removida
 
             // Adicionar controladores e suporte ao Swagger
             builder.Services.AddControllers();

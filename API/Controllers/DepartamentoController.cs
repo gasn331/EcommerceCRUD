@@ -30,6 +30,11 @@ namespace API.Controllers
         {
             var departamento = await _departamentoService.GetDepartamentoAsync(codigo);
 
+            if(departamento == null)
+            {
+                return NotFound();
+            }
+
             return Ok(departamento);
         }
 

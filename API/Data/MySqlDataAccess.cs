@@ -6,7 +6,7 @@ using System.Data;
 
 namespace API.Data
 {
-    public class MySqlDataAccess
+    public class MySqlDataAccess : IMySqlDataAccess
     {
         #region Definições
         private readonly string _connectionString;

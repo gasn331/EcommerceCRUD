@@ -7,10 +7,10 @@ namespace API.Services
 {
     public class ProdutoService : IProdutoService
     {
-        private readonly MySqlDataAccess _dataAccess;
+        private readonly IMySqlDataAccess _dataAccess;
         private readonly IMapper _mapper;
 
-        public ProdutoService(MySqlDataAccess dataAccess, IMapper mapper) 
+        public ProdutoService(IMySqlDataAccess dataAccess, IMapper mapper) 
         {
             _dataAccess = dataAccess;
             _mapper = mapper;

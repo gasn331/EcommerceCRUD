@@ -35,7 +35,10 @@ namespace API.Controllers
         public async Task<ActionResult<ProdutoDTO>> GetProduto(string codigo)
         {
             var produto = await _produtoService.GetProdutoAsync(codigo);
-            
+
+            if (produto == null)
+                return NotFound();
+
             return Ok(produto);
         }
 
@@ -49,7 +52,7 @@ namespace API.Controllers
 
             var createdProdutoDto = _mapper.Map<ProdutoDTO>(createdProduto);
 
-            return CreatedAtAction(nameof(GetProduto), new {codigo = createdProdutoDto.Codigo}, createdProduto);
+            return CreatedAtAction(nameof(GetProduto), new {codigo = createdProdutoDto.Codigo}, createdProdutoDto);
         }
 
         //PUT: api/produto/{codigo}
