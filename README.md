@@ -32,7 +32,7 @@ Execute o seguinte comando para clonar o repositório:
 
 ```bash
 git clone https://github.com/gasn331/EcommerceMaximaTech.git
-cd seu-repositorio
+cd EcommerceMaximaTech
 ```` 
 
 ### 2. Subindo o Banco de Dados com Docker
@@ -98,7 +98,7 @@ docker ps
 
 ### 8. Execução automatizada 
 
-Basta rodar o arquivo para iniciar tanto o banco de dados via Docker quanto a API e o MVC:
+Basta rodar o arquivo no prompt de comando dentro da pasta da solução para iniciar tanto o banco de dados via Docker quanto a API e o MVC:
 
 ```bash
 start run_project.bat
