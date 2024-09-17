@@ -9,13 +9,13 @@
 
 Veja algumas imagens da aplicação em exeução:
 
-![Tela de login](ExemplosDetela/TelaDeLogin.png)
+![Tela de login](ExemplosDeTela/TelaDeLogin.png)
 
-![Tela de Produtos](ExemplosDetela/TelaDeProdutos.png)
+![Tela de Produtos](ExemplosDeTela/TelaDeProdutos.png)
 
-![Tela de novo produto](ExemplosDetela/TelaDeNovoProduto.png)
+![Tela de novo produto](ExemplosDeTela/TelaDeNovoProduto.png)
 
-![Tela de Departamentos](ExemplosDetela/TelaDeDepartamentos.png)
+![Tela de Departamentos](ExemplosDeTela/TelaDeDepartamentos.png)
 
 ## Requisitos
 
