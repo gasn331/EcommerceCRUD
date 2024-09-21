@@ -101,7 +101,7 @@ docker ps
 Basta rodar o arquivo no prompt de comando dentro da pasta da solução para iniciar tanto o banco de dados via Docker quanto a API e o MVC:
 
 ```bash
-start run_project.bat
+start script-automacao.bat
 ```
 
 Este script abrirá duas janelas de comando, uma para a API e outra para a aplicação MVC, e deixará ambos os serviços rodando em segundo plano.
