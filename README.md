@@ -31,8 +31,8 @@ Certifique-se de que os seguintes softwares estão instalados no seu sistema:
 Execute o seguinte comando para clonar o repositório:
 
 ```bash
-git clone https://github.com/gasn331/EcommerceMaximaTech.git
-cd EcommerceMaximaTech
+git clone https://github.com/gasn331/EcommerceCRUD.git
+cd EcommerceCRUD
 ```` 
 
 ### 2. Subindo o Banco de Dados com Docker
